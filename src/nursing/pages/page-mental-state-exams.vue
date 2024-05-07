@@ -1,67 +1,58 @@
+/**
+ * @name page-mental-state-exams
+ * @description Vue component for the page displaying mental state exams.
+ */
 <script>
 import nursingApiService from "../services/nursingApi.service.js";
-import {onMounted} from "vue";
 export default {
   name: "page-mental-state-exams",
   data() {
     return {
-      exams: [],
-      nursingApi: new nursingApiService()
+      exams: [], // Array to store the mental state exams
+      nursingApi: new nursingApiService() // Instance of the nursingApiService class
     };
   },
   created() {
-    this.getExams()
+    this.getExams(); // Call the method to fetch the exams data
   },
   methods: {
+    /**
+     * @name getExams
+     * @description Fetches the mental state exams data from the API and processes it
+     */
     async getExams() {
       try {
-      const [mentalStateExamsResponse, examinersResponse, patientsResponse] = await Promise.all([
-        this.nursingApi.getMentalExams(),
-        this.nursingApi.getExaminers(),
-        this.nursingApi.getPatients()
-      ]);
+        // Fetch the mental state exams, examiners, and patients data concurrently
+        const [mentalStateExamsResponse, examinersResponse, patientsResponse] = await Promise.all([
+          this.nursingApi.getMentalExams(),
+          this.nursingApi.getExaminers(),
+          this.nursingApi.getPatients()
+        ]);
 
-      const mentalStateExams = mentalStateExamsResponse.data;
-      const examiners = examinersResponse.data;
-      const patients = patientsResponse.data;
+        const mentalStateExams = mentalStateExamsResponse.data; // Extract the mental state exams data
+        const examiners = examinersResponse.data; // Extract the examiners data
+        const patients = patientsResponse.data; // Extract the patients data
 
-      this.exams = mentalStateExams.map(exam => {
-        const patient = patients.find(patient => patient.id === exam.patientId);
-        const examiner = examiners.find(examiner => examiner.id === exam.examinerId);
+        // Process the mental state exams data and create a new array with required information
+        this.exams = mentalStateExams.map(exam => {
+          const patient = patients.find(patient => patient.id === exam.patientId); // Find the patient associated with the exam
+          const examiner = examiners.find(examiner => examiner.id === exam.examinerId); // Find the examiner associated with the exam
 
-        return {
-          photo: patient.photoUrl,
-          patientName: `${patient.firstName} ${patient.lastName}`,
-          examinerName: `${examiner.firstName} ${examiner.lastName}`,
-          birthDate: patient.birthDate,
-          examDate: exam.examDate,
-          examinerNationalProviderIdentifier: examiner.nationalProviderIdentifier,
-          totalScore: exam.orientationScore + exam.registrationScore + exam.attentionAndCalculationScore + exam.recallScore + exam.languageScore,
-        };
-      });
-      console.log(this.exams);
+          return {
+            photo: patient.photoUrl, // Patient's photo URL
+            patientName: `${patient.firstName} ${patient.lastName}`, // Patient's full name
+            examinerName: `${examiner.firstName} ${examiner.lastName}`, // Examiner's full name
+            birthDate: patient.birthDate, // Patient's birth date
+            examDate: exam.examDate, // Exam date
+            examinerNationalProviderIdentifier: examiner.nationalProviderIdentifier, // Examiner's national provider identifier
+            totalScore: exam.orientationScore + exam.registrationScore + exam.attentionAndCalculationScore + exam.recallScore + exam.languageScore, // Total score of the exam
+          };
+        });
+        //console.log(this.exams); // Log the processed exams data
       } catch (error) {
-      console.log(error);
+        console.log(error); // Log any errors that occur during the API calls
       }
     },
-    generateExams() {
-      let exams = [];
-      for (let i = 0; i < 10; i++) {
-        exams.push({
-          id: i,
-          patient: {
-            id: i,
-            name: "Patient " + i
-          },
-          examiner: {
-            id: i,
-            name: "Examiner " + i
-          },
-          date: new Date().toISOString()
-        })
-      }
-      this.exams = exams;
-    }
   },
 }
 </script>
