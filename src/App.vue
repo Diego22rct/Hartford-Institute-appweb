@@ -22,7 +22,6 @@ export default {
               <pv-image src="/public/HIGN-logo.png" alt="HIGN Logo" height="50" />
           </div>
       </template>
-
       <template #end>
           <div class="flex align-items-center gap-2">
             <router-link to="/home">
@@ -37,7 +36,7 @@ export default {
     </pv-toolbar>
   </header>
   <main>
-    <router-view />
+    <router-view></router-view>
   </main>
 </template>
 

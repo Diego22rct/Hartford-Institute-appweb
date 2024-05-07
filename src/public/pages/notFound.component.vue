@@ -1,12 +1,13 @@
 <script>
 export default {
-    name: "NotFound"
+    name: "NotFound",
 }
 </script>
 
 <template>
-    <div>
-        <h1>404 Page Not Found</h1>
+    <div class="flex flex-column align-items-center justify-center">
+        <h1>404</h1>
+        <p>Page not found</p>
     </div>
 </template>
 

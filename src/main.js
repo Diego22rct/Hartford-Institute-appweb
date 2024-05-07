@@ -23,12 +23,12 @@ import Avatar from "primevue/avatar";
 import Image from 'primevue/image';
 
 // Internationalization
-import {i18n} from './locales'
+import i18n from './locales'
 
 createApp(App)
-    .use(PrimeVue, {ripple: true})
     .use(router)
     .use(i18n)
+    .use(PrimeVue)
     .component('pv-toolbar', Toolbar)
     .component('pv-button', Button)
     .component('pv-avatar', Avatar)
