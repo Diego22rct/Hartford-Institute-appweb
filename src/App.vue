@@ -1,15 +1,31 @@
 <script>
+import {ref, onMounted} from 'vue';
 export default {
   name: 'App',
   title: 'HIGN',
   data() {
     return {
+      nowLocale: ref(this.$i18n.locale),
+      availableLocales: ref([]),
+      isShowingLocalesList: false,
     };
   },
+  setup() {
+  },
   methods: {
-      changeLanguage() {
-        this.$i18n.locale = this.$i18n.locale === 'en' ? 'es' : 'en';
+    showLocalesList() {
+      if (this.availableLocales.length > 0) {
+        this.isShowingLocalesList = !this.isShowingLocalesList;
+        return;
       }
+      if (this.$i18n.availableLocales.length === 0) {
+        return;
+      }
+      this.$i18n.availableLocales.forEach(locale => {
+        this.availableLocales.push(locale);
+      });
+      this.isShowingLocalesList = !this.isShowingLocalesList;
+    },
   }
 }
 </script>
@@ -30,8 +46,10 @@ export default {
             <router-link to="/nursing/mental-state-exams">
               <pv-button label="Mental exams" text plain severity="contrast" />
             </router-link>
+            <pv-button @click="showLocalesList" :label="nowLocale.toLocaleUpperCase()" text plain severity="contrast" />
+            <pv-listbox v-if="isShowingLocalesList" v-model="nowLocale" :options="availableLocales" @change="() => {this.$i18n.locale = nowLocale;
+              this.isShowingLocalesList = false;}" />
           </div>
-          <pv-button @click="changeLanguage" label="Change Language" text plain severity="contrast" />
       </template>
     </pv-toolbar>
   </header>
