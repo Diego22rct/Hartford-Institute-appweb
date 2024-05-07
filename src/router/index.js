@@ -6,6 +6,7 @@
 
 import {createRouter, createWebHistory} from "vue-router";
 import HomeComponent from "../public/pages/home.component.vue";
+import notFoundComponent from "../public/pages/notFound.component.vue";
 
 
 const router = createRouter({
@@ -13,7 +14,8 @@ const router = createRouter({
     routes: [
         { path: '/home',    component: HomeComponent, meta: { title: 'Home' } },
         //{ path: '/nursing/mental-state-exams',   component: , meta: { title: 'Mental state exams' } },
-        { path: '/',        redirect: '/home' },
+        { path: '/', redirect: '/home' },
+        { path: "/:pathMatch(.*)*", component: notFoundComponent },
     ],
 });
 
