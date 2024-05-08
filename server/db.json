@@ -181,9 +181,9 @@
       "examinerId": 2,
       "examDate": "2024-03-26",
       "orientationScore": 5,
-      "registrationScore": "0",
+      "registrationScore": 0,
       "attentionAndCalculationScore": 5,
-      "recallScore": "0",
+      "recallScore": 0,
       "languageScore": 8
     },
     {
@@ -203,8 +203,8 @@
       "examinerId": 2,
       "examDate": "2023-09-19",
       "orientationScore": 8,
-      "registrationScore": "0",
-      "attentionAndCalculationScore": "0",
+      "registrationScore": 0,
+      "attentionAndCalculationScore": 0,
       "recallScore": 1,
       "languageScore": 5
     },

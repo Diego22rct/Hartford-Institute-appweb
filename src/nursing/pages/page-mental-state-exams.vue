@@ -4,12 +4,17 @@
  */
 <script>
 import nursingApiService from "../services/nursingApi.service.js";
+import cardMentalExamComponent from "../components/cardMentalExam.component.vue";
+
 export default {
   name: "page-mental-state-exams",
+  components: {
+    cardMentalExamComponent
+  },
   data() {
     return {
       exams: [], // Array to store the mental state exams
-      nursingApi: new nursingApiService() // Instance of the nursingApiService class
+      nursingApi: new nursingApiService(), // Instance of the nursingApiService class
     };
   },
   created() {
@@ -27,7 +32,7 @@ export default {
           this.nursingApi.getMentalExams(),
           this.nursingApi.getExaminers(),
           this.nursingApi.getPatients()
-        ]);
+        ])
 
         const mentalStateExams = mentalStateExamsResponse.data; // Extract the mental state exams data
         const examiners = examinersResponse.data; // Extract the examiners data
@@ -48,7 +53,7 @@ export default {
             totalScore: exam.orientationScore + exam.registrationScore + exam.attentionAndCalculationScore + exam.recallScore + exam.languageScore, // Total score of the exam
           };
         });
-        //console.log(this.exams); // Log the processed exams data
+        this.$toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });//console.log(this.exams); // Log the processed exams data
       } catch (error) {
         console.log(error); // Log any errors that occur during the API calls
       }
@@ -59,8 +64,11 @@ export default {
 
 <template>
     <div class="flex flex-column align-items-center justify-center">
-        <h1>Mental State Exams</h1>
-        <p>Page for mental state exams</p>
+        <h1>{{$t("nursing.title")}}</h1>
+
+        <div class="align-content-center justify-content-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <card-mental-exam-component v-for="exam in exams" :key="exam.patientName" :exam="exam" />
+        </div>
     </div>
 </template>
 

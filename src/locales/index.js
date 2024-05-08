@@ -9,7 +9,7 @@ const i18n = createI18n({
                 hero_text: 'HIGN advances equitable health care for older adults by educating the workforce and future professionals, informing policy, advancing research, and providing community programs.'
             },
             nursing: {
-                title: "",
+                title: "Mental State Exams",
                 data: {
 
                 }
@@ -21,7 +21,7 @@ const i18n = createI18n({
                 hero_text: 'HIGN promueve la atención médica equitativa para los adultos mayores al educar a la fuerza laboral y a los futuros profesionales, informar las políticas, promover la investigación y brindar programas comunitarios'
             },
             nursing: {
-                title: "",
+                title: "Exámenes del estado mental",
                 data: {
 
                 }

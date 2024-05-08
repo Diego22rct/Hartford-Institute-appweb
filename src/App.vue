@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     showLocalesList() {
+      this.$toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
       if (this.availableLocales.length > 0) {
         this.isShowingLocalesList = !this.isShowingLocalesList;
         return;
@@ -25,6 +26,7 @@ export default {
         this.availableLocales.push(locale);
       });
       this.isShowingLocalesList = !this.isShowingLocalesList;
+
     },
   }
 }

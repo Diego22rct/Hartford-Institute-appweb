@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
 import router from './router'
 
@@ -15,6 +14,7 @@ import 'primeicons/primeicons.css';
 // PrimeVue Material Design Theme
 import 'primevue/resources/themes/mdc-light-indigo/theme.css';
 
+import ToastService from 'primevue/toastservice';
 
 // PrimeVue Components
 import Toolbar from 'primevue/toolbar';
@@ -22,17 +22,20 @@ import Button from "primevue/button";
 import Avatar from "primevue/avatar";
 import Image from 'primevue/image';
 import Listbox from 'primevue/listbox';
+import Card from "primevue/card";
 
 // Internationalization
 import i18n from './locales'
 
 createApp(App)
-    .use(PrimeVue, {ripple: true})
+    .use(PrimeVue)
     .use(router)
     .use(i18n)
+    .use(ToastService)
     .component('pv-toolbar', Toolbar)
     .component('pv-button', Button)
     .component('pv-avatar', Avatar)
     .component('pv-image', Image)
     .component('pv-listbox', Listbox)
+    .component('pv-card', Card)
     .mount('#app')
